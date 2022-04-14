@@ -90,4 +90,4 @@ app.get('/api/entries', async (req, res) => {
 });
 
 
-app.listen(3000, () => console.log('Server listening on port 3300!'));
+app.listen(3300, () => console.log('Server listening on port 3300!'));
