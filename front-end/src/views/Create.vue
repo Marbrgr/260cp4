@@ -153,9 +153,9 @@ export default {
           subject: this.subject,
         })
       } catch (error) {
-        console.log(error);
+        return false;
+       
       }
-      console.log(this.users);
       this.getEntries();
     },
     async upload() {
@@ -218,7 +218,6 @@ export default {
     },
     selectEntry(entry) {
       this.findEntry = entry;
-      console.log(entry);
       this.findUser = "";
     },
     async deleteItem(item) {
@@ -232,19 +231,14 @@ export default {
       }
     },
     async deleteEntry(entry) {
-      console.log("got into the delete entries space");
       try {
         await axios.delete("/api/entries/" + entry._id);
         this.findEntry = null;
         this.getEntries();
         let testVar = this.users();
-        console.log("here are the test users")
-        console.log(testVar);
       } catch (error) {
-        console.log(error);
         return false;
       }
-      console.log("this is another test...?")
       return true;
     },
     async editEntry(entry) {
