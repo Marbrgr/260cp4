@@ -54,39 +54,13 @@
         <p></p>
         <textarea v-model="findEntry.content" placeholder="Entry"/>
         <p></p>
-        <!-- <button @click="saveEntry">Save</button>
-        <p></p> -->
+       
       </div>
 
       <div class="actions" v-if="findEntry">
         <button @click="deleteEntry(findEntry)">Delete</button>
         <button @click="editEntry(findEntry)">Edit</button>
       </div>
-
-      <!-- <div class="actions" v-if="findItem">
-        <button @click="deleteItem(findItem)">Delete</button>
-        <button @click="editItem(findItem)">Edit</button>
-      </div> -->
-
-      <!-- <div class="edit">
-      <div class="form">
-        <input v-model="findTitle" placeholder="Search">
-        <div class="suggestions" v-if="suggestions.length > 0">
-          <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectItem(s)">{{s.title}}
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="upload" v-if="findItem">
-        <input v-model="findItem.title">
-        <p></p>
-        <textarea v-model="findItem.description"/>
-        <p></p>
-        <img :src="findItem.path" />
-      </div>
-      <div class="actions" v-if="findItem">
-        <button @click="deleteItem(findItem)">Delete</button>
-        <button @click="editItem(findItem)">Edit</button>
-      </div> -->
     </div>
 
     
@@ -360,30 +334,3 @@ button {
 
 </style>
 
-
-
-
-
-    <!-- <div class="heading">
-      <h2>toCopy</h2>
-    </div>
-    <div class="edit">
-      <div class="form">
-        <input v-model="findTitle" placeholder="Search">
-        <div class="suggestions" v-if="suggestions.length > 0">
-          <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectItem(s)">{{s.title}}
-          </div>
-        </div>
-      </div>
-      <div class="upload" v-if="findItem">
-        <input v-model="findItem.title">
-        <p></p>
-        <textarea v-model="findItem.description"/>
-        <p></p>
-        <img :src="findItem.path" />
-      </div>
-      <div class="actions" v-if="findItem">
-        <button @click="deleteItem(findItem)">Delete</button>
-        <button @click="editItem(findItem)">Edit</button>
-      </div>
-    </div> -->

@@ -1,14 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 
-const multer = require('multer')
-const upload = multer({
-  dest: '../front-end/public/images/',
-  limits: {
-    fileSize: 10000000
-  }
-});
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -17,12 +9,6 @@ app.use(bodyParser.urlencoded({
 
 const mongoose = require('mongoose');
 
-const itemSchema = new mongoose.Schema({
-  title: String,
-  path: String,
-  description: String,
-});
-
 const entrySchema = new mongoose.Schema({
   username: String,
   date: String,
@@ -30,17 +16,7 @@ const entrySchema = new mongoose.Schema({
   content: String,
 })
 
-const Item = mongoose.model('Item', itemSchema);
 const Entry = mongoose.model('Entry', entrySchema);
-
-app.post('/api/photos', upload.single('photo'), async (req, res) => {
-  if (!req.file) {
-    return res.sendStatus(400);
-  }
-  res.send({
-    path: "/images/" + req.file.filename
-  });
-});
 
 
 // connect to the database
@@ -51,21 +27,6 @@ mongoose.connect('mongodb+srv://marbrgr:toor@cs260cluster.05c26.mongodb.net/jour
   useNewUrlParser: true
 });
 
-// Create a new item in the museum: takes a title and a path to an image.
-app.post('/api/items', async (req, res) => {
-  const item = new Item({
-    title: req.body.title,
-    path: req.body.path,
-    description: req.body.description,
-  });
-  try {
-    await item.save();
-    res.send(item);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
 
 app.post('/api/saveEntry', async(req, res) => {
   const entry = new Entry({
@@ -83,17 +44,6 @@ app.post('/api/saveEntry', async(req, res) => {
   }
 })
 
-app.delete('/api/items/:id', async (req, res) => {
-  try {
-    await Item.deleteOne({
-      _id: req.params.id
-    });
-    res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
 
 app.delete("/api/entries/:id", async (req, res) => {
   console.log("delete called on server");
@@ -106,24 +56,6 @@ app.delete("/api/entries/:id", async (req, res) => {
     res.sendStatus(500);
   }
 })
-
-app.put('/api/items/:id', async (req, res) => {
-  try {
-    var selectedItem = await Item.findOne({
-      _id: req.params.id
-    });
-    selectedItem.title = req.body.title;
-    selectedItem.description = req.body.description;
-    try {
-      await selectedItem.save();
-      res.send(selectedItem);
-    } catch (error) {
-      console.log(error);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
 
 app.put("/api/entries/:id", async (req, res) => {
   try {
@@ -145,15 +77,6 @@ app.put("/api/entries/:id", async (req, res) => {
   }
 });
 
-app.get('/api/items', async (req, res) => {
-  try {
-    let items = await Item.find();
-    res.send(items);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
 
 app.get('/api/entries', async (req, res) => {
   try {
