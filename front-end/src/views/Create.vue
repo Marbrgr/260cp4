@@ -209,7 +209,6 @@ export default {
         await axios.delete("/api/entries/" + entry._id);
         this.findEntry = null;
         this.getEntries();
-        let testVar = this.users();
       } catch (error) {
         return false;
       }
